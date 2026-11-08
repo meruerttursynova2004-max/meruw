@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="kk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b1026"><title>Педагогикалық шеберлік</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+:root{--a:#7c5cff;--b:#00d4b4;--c:#ff7a59;--g:rgba(255,255,255,.09)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:'Montserrat',Arial,sans-serif;color:#fff;background:#0b1026}
+body::before{content:"";position:fixed;inset:-30%;background:radial-gradient(circle at 20% 30%,#4b2fd9 0,transparent 40%),radial-gradient(circle at 80% 70%,#00b49a 0,transparent 40%),radial-gradient(circle at 60% 20%,#e0507a 0,transparent 35%);filter:blur(60px);opacity:.55;animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(8%,-6%) rotate(25deg) scale(1.15)}}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:1}
+.bar{position:fixed;top:0;left:0;right:0;height:5px;z-index:7}
+.bar i{display:block;height:100%;width:14%;background:linear-gradient(90deg,var(--b),var(--a),var(--c));transition:width .6s}
+.slide{position:absolute;inset:0;padding:6vh 7vw 13vh;display:flex;flex-direction:column;justify-content:center;gap:2.4vh;opacity:0;visibility:hidden;transform:scale(.94) translateX(6%);transition:all .7s cubic-bezier(.2,.8,.2,1)}
+.slide.active{opacity:1;visibility:visible;transform:none;z-index:3}
+.slide.out{transform:scale(.94) translateX(-6%)}
+.rv{opacity:0;transform:translateY(50px) scale(.96)}
+.active .rv{animation:up .9s cubic-bezier(.2,.8,.2,1) var(--d,0s) forwards}
+@keyframes up{to{opacity:1;transform:none}}
+h1{font-size:clamp(26px,4.6vw,64px);font-weight:800;line-height:1.15}
+.slide:first-child h1{min-height:3.5em}
+.grad{background:linear-gradient(90deg,#fff,#9ff0e2,#c3b5ff,#fff);background-size:300%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s linear infinite}
+@keyframes shine{to{background-position:300%}}
+.caret{display:inline-block;width:.07em;height:.9em;background:#fff;margin-left:6px;vertical-align:-.1em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.author{align-self:flex-start;padding:10px 24px;border-radius:50px;background:linear-gradient(90deg,var(--a),var(--b));font-weight:600;font-size:clamp(14px,1.8vw,22px);box-shadow:0 0 30px rgba(124,92,255,.6)}
+.tag{letter-spacing:.3em;text-transform:uppercase;color:#9ff0e2;font-size:clamp(11px,1.3vw,16px)}
+.hint{opacity:.7;font-size:clamp(12px,1.3vw,16px)}
+h2{font-size:clamp(24px,3.6vw,48px);font-weight:800}
+h2 span{color:var(--b)}
+.big{font-size:clamp(18px,2.6vw,34px);line-height:1.5;max-width:1000px}
+em{font-style:normal;color:#ffd166}
+.chips{display:flex;flex-wrap:wrap;gap:12px}
+.chip{padding:10px 22px;border-radius:40px;background:var(--g);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px);font-size:clamp(13px,1.6vw,20px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.card{position:relative;height:100%;padding:28px;border-radius:24px;background:var(--g);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(12px);transition:transform .2s,box-shadow .3s;overflow:hidden}
+.card:hover{box-shadow:0 0 40px rgba(0,212,180,.35)}
+.num{position:absolute;right:18px;top:0;font-style:normal;font-size:4.5em;font-weight:800;opacity:.12}
+.card h3{font-size:clamp(18px,2.2vw,28px);margin-bottom:14px;color:#ffd166}
+.card li{list-style:none;padding:7px 0 7px 28px;position:relative;font-size:clamp(13px,1.5vw,19px)}
+.card li::before{content:"\2726";position:absolute;left:0;color:var(--b)}
+.orbit{--S:min(56vmin,440px);--R:calc(var(--S)*.4);position:relative;width:var(--S);height:var(--S);margin:0 auto}
+.ring{position:absolute;inset:0;border:2px dashed rgba(255,255,255,.3);border-radius:50%;animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.node{position:absolute;left:50%;top:50%;width:0;height:0;transform:rotate(var(--r)) translateY(calc(var(--R)*-1))}
+.node div{position:absolute;left:0;top:0;translate:-50% -50%;width:clamp(125px,19vmin,175px);padding:10px;border-radius:16px;text-align:center;font-weight:600;font-size:clamp(11px,1.5vmin + 4px,16px);background:linear-gradient(135deg,var(--a),var(--b));box-shadow:0 0 24px rgba(0,212,180,.5);animation:cspin 40s linear infinite}
+@keyframes cspin{from{transform:rotate(calc(var(--r)*-1))}to{transform:rotate(calc(-360deg - var(--r)))}}
+.core{position:absolute;inset:30%;border-radius:50%;display:grid;place-items:center;text-align:center;font-weight:800;font-size:clamp(11px,1.6vw,20px);padding:10px;background:radial-gradient(circle,var(--a),#2a1a8a);box-shadow:0 0 60px var(--a);animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.08);box-shadow:0 0 90px var(--b)}}
+.line{height:5px;border-radius:5px;background:linear-gradient(90deg,var(--b),var(--a),var(--c));transform-origin:left;transform:scaleX(0)}
+.active .line{animation:grow 1.8s .3s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes grow{to{transform:none}}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px}
+.step{padding:22px;border-radius:20px;background:var(--g);border:1px solid rgba(255,255,255,.22);font-size:clamp(14px,1.6vw,20px);font-weight:600}
+.step b{display:grid;place-items:center;width:46px;height:46px;margin-bottom:12px;border-radius:50%;background:linear-gradient(135deg,var(--c),var(--a));font-size:20px}
+.nav{position:fixed;bottom:3vh;left:50%;transform:translateX(-50%);display:flex;gap:16px;align-items:center;z-index:7;font-weight:600}
+.nav button{width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:var(--g);color:#fff;font-size:20px;cursor:pointer;backdrop-filter:blur(6px);transition:.3s}
+.nav button:hover{background:var(--a);transform:scale(1.15)}
+.end h1{font-size:clamp(30px,6vw,84px)}
+body::before{translate:calc(var(--mx,0)*40px) calc(var(--my,0)*40px)}
+.slide:first-child::after{content:"";position:absolute;right:8vw;top:50%;width:26vmin;height:26vmin;margin-top:-13vmin;border-radius:50%;background:conic-gradient(var(--a),var(--b),var(--c),var(--a));-webkit-mask:radial-gradient(circle,transparent 58%,#000 60%);mask:radial-gradient(circle,transparent 58%,#000 60%);animation:spin 8s linear infinite;opacity:.8}
+@media(max-width:700px){.slide:first-child::after{display:none}}
+.ico{width:44px;height:44px;margin-bottom:10px;fill:none;stroke:var(--b);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ico path{stroke-dasharray:1;stroke-dashoffset:1}
+.active .ico path{animation:draw 2s .8s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.tools{position:fixed;top:2vh;right:2vw;display:flex;gap:8px;z-index:7}
+.tools button{padding:8px 14px;border-radius:30px;border:1px solid rgba(255,255,255,.4);background:var(--g);color:#fff;font:600 13px Montserrat,Arial,sans-serif;cursor:pointer;backdrop-filter:blur(6px);transition:.3s}
+.tools button.on{background:var(--b);color:#05261f}
+.tools button:hover{transform:scale(1.08)}
+
+.mini{display:flex;align-items:flex-end;gap:4px;position:relative;height:clamp(95px,16vh,140px);margin-top:16px}
+.mini.abs{position:absolute;right:5vw;bottom:15vh;height:clamp(110px,20vh,170px);margin:0;z-index:2}
+.ch{height:100%;width:auto;overflow:visible}
+.sc{height:86%}
+.bob{transform-box:fill-box;transform-origin:50% 100%;animation:bob 2s ease-in-out infinite}
+.sc .bob{animation-delay:-.7s}
+@keyframes bob{50%{transform:translateY(-4px)}}
+.arm{transform-box:fill-box;transform-origin:50% 10%}
+.wave .arm.r{animation:wave .8s ease-in-out infinite alternate}
+@keyframes wave{from{transform:rotate(-135deg)}to{transform:rotate(-175deg)}}
+.raise .arm.r{animation:raise 2.6s ease-in-out infinite}
+.mini .ch:nth-of-type(3) .arm.r{animation-delay:-1.1s}
+.mini .ch:nth-of-type(4) .arm.r{animation-delay:-1.8s}
+@keyframes raise{0%,30%,100%{transform:rotate(0)}45%,80%{transform:rotate(-165deg)}}
+.point .arm.r{transform:rotate(-105deg);animation:pt 1.2s ease-in-out infinite alternate}
+@keyframes pt{to{transform:rotate(-125deg)}}
+.talk .arm.r{animation:tk 1s ease-in-out infinite alternate}
+@keyframes tk{from{transform:rotate(-30deg)}to{transform:rotate(-75deg)}}
+.talk .arm.l{animation:tkl 1.1s ease-in-out infinite alternate}
+@keyframes tkl{from{transform:rotate(20deg)}to{transform:rotate(55deg)}}
+.write .arm.r{transform:rotate(-25deg);animation:wr .35s ease-in-out infinite alternate}
+@keyframes wr{from{transform:rotate(-20deg)}to{transform:rotate(-36deg)}}
+.think .bob{animation:tilt 3s ease-in-out infinite}
+@keyframes tilt{50%{transform:rotate(-6deg)}}
+.nod .bob{animation:nod 1.4s ease-in-out infinite}
+@keyframes nod{50%{transform:translateY(3px) rotate(2deg)}}
+.talk .mo,.wave .mo{transform-box:fill-box;transform-origin:center;animation:mo .35s ease-in-out infinite alternate}
+@keyframes mo{to{transform:scaleY(.25)}}
+.bubble{position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:#fff;color:#1b1b2f;padding:6px 14px;border-radius:14px;font-size:clamp(11px,1.2vw,15px);font-weight:600;white-space:nowrap;animation:pop 3s ease-in-out infinite}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-5px;width:10px;height:10px;background:#fff;transform:translateX(-50%) rotate(45deg)}
+@keyframes pop{50%{transform:translateX(-50%) scale(1.07)}}
+.board{align-self:flex-end;width:clamp(50px,6vw,84px);height:clamp(40px,5vw,66px);margin:0 4px 14%;border-radius:6px;background:#1f5d4a;border:3px solid #c8a26b;position:relative}
+.board::after{content:"";position:absolute;left:7px;top:10px;height:3px;width:0;background:#fff;box-shadow:0 10px #fff,0 20px #fff;animation:chalk 3s linear infinite}
+@keyframes chalk{to{width:70%}}
+.ht{position:absolute;left:12%;bottom:55%;color:#ff5d8f;font-style:normal;font-size:20px;opacity:0;animation:fly 2.4s ease-in infinite}
+@keyframes fly{0%{opacity:0;transform:translateY(0) scale(.6)}20%{opacity:1}100%{opacity:0;transform:translateY(-60px) scale(1.2)}}
+@media(max-width:800px),(max-height:640px){.mini,.mini.abs{display:none}}
+.mini{margin-top:36px}
+.mini.abs{bottom:11vh;height:clamp(100px,18vh,150px);margin-top:0}
+
+.media{display:flex;gap:14px;flex-wrap:wrap}
+.m{margin:0;width:clamp(120px,14vw,190px);border-radius:18px;overflow:hidden;background:var(--g);border:1px solid rgba(255,255,255,.25);transition:translate .3s,scale .3s,box-shadow .3s}
+.m:hover{translate:0 -6px;scale:1.05;box-shadow:0 0 30px rgba(0,212,180,.5)}
+.m img{display:block;width:100%;height:clamp(80px,14vh,125px);object-fit:cover}
+.m figcaption{padding:8px 10px;font-weight:600;font-size:clamp(12px,1.4vw,17px);text-align:center}
+.m.bad{background:linear-gradient(135deg,var(--a),var(--b))}
+.gth{position:absolute;right:16px;top:16px;width:clamp(64px,8vw,96px);height:clamp(64px,8vw,96px);border-radius:18px;overflow:hidden;border:2px solid rgba(255,255,255,.4);box-shadow:0 0 22px rgba(124,92,255,.5)}
+.gth img{width:100%;height:100%;object-fit:cover;display:block}
+.card:has(.gth) .num{display:none}
+.step .th{display:block;width:100%;height:clamp(70px,13vh,110px);object-fit:cover;border-radius:12px;margin-bottom:12px}
+.kb{animation:kb 8s ease-in-out infinite alternate}
+@keyframes kb{from{object-position:0 0}to{object-position:100% 100%}}
+@media(max-width:1100px){.slide:nth-child(2) .mini.abs{display:none}}
+
+.media{align-items:flex-start;gap:clamp(14px,3vw,40px)}
+.col{display:flex;flex-direction:column;align-items:center;gap:6px}
+.col .chip{font-weight:700;background:linear-gradient(135deg,var(--a),var(--b));border:0}
+.arr{width:28px;height:28px;fill:none;stroke:#ffd166;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;animation:bn 1.1s ease-in-out infinite}
+@keyframes bn{50%{transform:translateY(5px)}}
+.col .m{width:clamp(140px,16vw,215px)}
+.m img{object-fit:contain;height:clamp(80px,17vh,140px);background:rgba(255,255,255,.07)}
+.slide:nth-child(2) .big{font-size:clamp(16px,2.1vw,28px)}
+.gth{width:clamp(100px,12vw,160px);height:clamp(80px,12vh,120px);top:14px;background:rgba(255,255,255,.08)}
+.gth img{object-fit:contain}
+.slide:nth-child(5) .grid{grid-template-columns:1fr auto 1fr}
+.gp{display:grid;place-items:center}
+.gp .m{width:clamp(150px,18vw,260px);animation:fl 4s ease-in-out infinite;box-shadow:0 0 40px rgba(124,92,255,.45)}
+.gp .m img{height:auto;max-height:42vh;width:100%}
+@keyframes fl{50%{translate:0 -10px}}
+.step .th.fit{object-fit:contain;background:rgba(255,255,255,.07)}
+@media(max-width:800px){.slide:nth-child(5) .grid{grid-template-columns:1fr}}
+.gth{width:clamp(90px,10vw,130px);height:clamp(70px,10vh,100px)}
+/* ===== барлық құрылғыға (Android, iPhone, ноутбук) ===== */
+html,body{height:100dvh;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+.chip,.card,.step,.m,.nav button,.tools button{-webkit-backdrop-filter:blur(10px)}
+.gth{position:static;display:block;margin:0 auto 10px;width:min(100%,280px);height:clamp(90px,17vh,140px);border-radius:16px}
+.card:has(.gth) .ico{display:none}
+@media(max-width:800px),(max-height:640px){
+ .slide{overflow-y:auto;overflow-x:hidden;justify-content:flex-start;padding-top:max(9vh,70px);padding-bottom:130px;-webkit-overflow-scrolling:touch}
+ .tools{top:8px;right:8px;gap:6px}
+ .tools button{padding:6px 10px;font-size:12px}
+}
+@media(max-width:800px) and (min-height:641px){
+ .mini,.mini.abs,.slide:nth-child(2) .mini.abs{display:flex}
+ .mini.abs{position:relative;right:auto;bottom:auto;align-self:center;height:120px;margin:16px 0 0;order:9}
+ .gth{height:110px}
+}
+@media(max-width:700px){.orbit{--S:min(90vw,58vh)}.node div{width:100px;font-size:11px;padding:7px}}
+@media(max-width:700px){.orbit{--S:min(84vw,54vh);--R:calc(var(--S)*.36)}}
+
+</style></head><body>
+<canvas id="bg"></canvas>
+<div class="bar"><i id="pr"></i></div>
+<main id="deck">
+
+<section class="slide active" data-say="Жоғары мектеп оқытушысы педагогикалық шеберлігінің құрауыштары. Дайындаған Тұрсынова Меруерт.">
+  <div class="mini abs rv" style="--d:1.3s" data-sc="t.wave s.raise s.think" data-b="Сәлеметсіздер ме!"></div>
+  <div class="author rv" style="--d:.1s">Дайындаған: Тұрсынова Меруерт</div>
+  <p class="tag rv" style="--d:.3s">Жоғары мектеп педагогикасы</p>
+  <h1 class="rv" style="--d:.5s"><span class="grad" id="typed" data-t="Жоғары мектеп оқытушысы педагогикалық шеберлігінің құрауыштары"></span><b class="caret"></b></h1>
+  <p class="hint rv" style="--d:1.4s">Алға: → / бос орын / сырғыту</p>
+</section>
+
+<section class="slide" data-say="Педагогикалық шеберлік дегеніміз кәсіби іс-әрекетті жоғары деңгейде, шығармашылықпен орындауды қамтамасыз ететін тұлғалық және кәсіби қасиеттер жиынтығы.">
+  <div class="mini abs rv" style="--d:1.5s" data-sc="t.point s.raise s.raise s.write" data-p="board" data-b="Шеберлік неден тұрады?"></div>
+  <h2 class="rv">Педагогикалық шеберлік – <span>не?</span></h2>
+  <p class="big rv" style="--d:.3s">Кәсіби іс-әрекетті жоғары деңгейде, шығармашылықпен орындауды қамтамасыз ететін <em>тұлғалық және кәсіби қасиеттер жиынтығы</em></p>
+  <div class="chips">
+    <span class="chip rv" style="--d:.6s">Іскерлік</span><span class="chip rv" style="--d:.75s">Дағды</span><span class="chip rv" style="--d:.9s">Тұлғалық сапа</span>
+  </div>
+  <div class="media"><div class="col rv" style="--d:1s"><span class="chip">Білім</span><svg class="arr" viewBox="0 0 24 24"><path d="M12 3v16M6 13l6 7 6-7"/></svg><figure class="m"><img src="https://otvet.imgsmail.ru/download/42258017_312b475e1ad765398626ccf612cac76d_800.gif" alt="Білім" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.m').classList.add('bad');this.remove()"></figure></div><div class="col rv" style="--d:1.2s"><span class="chip">Шығармашылық</span><svg class="arr" viewBox="0 0 24 24"><path d="M12 3v16M6 13l6 7 6-7"/></svg><figure class="m"><img src="https://images.squarespace-cdn.com/content/v1/580394d6d2b857996ca8df7a/1495473154667-SWJVU3O0JWPMRENGOWMH/shape02.gif" alt="Шығармашылық" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.m').classList.add('bad');this.remove()"></figure></div><div class="col rv" style="--d:1.4s"><span class="chip">Рефлексия</span><svg class="arr" viewBox="0 0 24 24"><path d="M12 3v16M6 13l6 7 6-7"/></svg><figure class="m"><img src="https://media1.tenor.com/m/KheLknbHggkAAAAd/reflection-light.gif" alt="Рефлексия" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.m').classList.add('bad');this.remove()"></figure></div></div>
+</section>
+
+<section class="slide" data-say="Шеберлік төрт құрауыштан тұрады: гуманистік бағыттылық, кәсіби білімділік, педагогикалық қабілеттер және педагогикалық техника.">
+  <h2 class="rv">Шеберліктің <span>4 құрауышы</span></h2>
+  <div class="orbit rv" style="--d:.3s">
+    <div class="ring">
+      <div class="node" style="--r:0deg"><div>1. Гуманистік бағыттылық</div></div>
+      <div class="node" style="--r:90deg"><div>2. Кәсіби білімділік</div></div>
+      <div class="node" style="--r:180deg"><div>3. Педагогикалық қабілеттер</div></div>
+      <div class="node" style="--r:270deg"><div>4. Педагогикалық техника</div></div>
+    </div>
+    <div class="core">Педагогикалық шеберлік</div>
+  </div>
+  <p class="hint rv" style="--d:1s">И.А. Зязюн моделі бойынша</p>
+</section>
+
+<section class="slide" data-say="Гуманистік бағыттылық студентке құрмет пен сенімді, педагогикалық оптимизмді және кәсіби этиканы қамтиды. Кәсіби білімділік пәндік, психологиялық-педагогикалық, әдістемелік және ғылыми-зерттеушілік білімнен тұрады.">
+  <h2 class="rv">1–2. Бағыттылық және <span>білім</span></h2>
+  <div class="grid">
+    <div class="rv" style="--d:.3s"><div class="card"><i class="num">01</i><div class="gth"><img src="https://media1.tenor.com/m/TJsMkJT58RQAAAAC/education-students.gif" alt="Бағыттылық" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></div><svg class="ico" viewBox="0 0 24 24"><path pathLength="1" d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg><h3>Гуманистік бағыттылық</h3><ul><li>Студентке құрмет пен сенім</li><li>Педагогикалық оптимизм</li><li>Кәсіби этика, жауапкершілік</li><li>Өзін-өзі дамытуға ұмтылу</li></ul><div class="mini" data-sc="t.talk s.nod" data-p="hearts" data-b="Пікіріңіз маңызды!"></div></div></div>
+    <div class="rv" style="--d:.6s"><div class="card"><i class="num">02</i><svg class="ico" viewBox="0 0 24 24"><path pathLength="1" d="M3 5h7a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H3zM21 5h-7a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h7z"/></svg><h3>Кәсіби білімділік</h3><ul><li>Пәндік білім</li><li>Психологиялық-педагогикалық білім</li><li>Әдістемелік және технологиялық білім</li><li>Ғылыми-зерттеушілік білім</li></ul><div class="mini" data-sc="t.point s.write" data-p="board" data-b="Білім – негіз"></div></div></div>
+  </div>
+</section>
+
+<section class="slide" data-say="Педагогикалық қабілеттерге коммуникативтік, дидактикалық, ұйымдастырушылық және перцептивтік қабілеттер жатады. Педагогикалық техника сөйлеу мәдениетін, ым-ишараны, эмоцияны реттеуді және қарым-қатынас техникасын қамтиды.">
+  <h2 class="rv">3–4. Қабілеттер және <span>техника</span></h2>
+  <div class="grid">
+    <div class="rv" style="--d:.3s"><div class="card"><i class="num">03</i><svg class="ico" viewBox="0 0 24 24"><path pathLength="1" d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2-5.5-2.9-5.5 2.9 1-6.2L3 9.6l6.2-.9z"/></svg><h3>Педагогикалық қабілеттер</h3><ul><li>Коммуникативтік</li><li>Дидактикалық (түсіндіру)</li><li>Ұйымдастырушылық</li><li>Перцептивтік: байқағыштық</li><li>Педагогикалық ойлау, рефлексия</li></ul><div class="mini" data-sc="s.raise t.talk s.raise" data-p="" data-b="Мен білемін!"></div></div></div>
+    <div class="rv gp" style="--d:.45s"><figure class="m"><img src="https://ddt.obr-aleksin.ru/sites/obr-aleksin.ru/files/epage/476/images/teacher2.gif" alt="Мұғалім" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.m').classList.add('bad');this.remove()"></figure></div>
+    <div class="rv" style="--d:.6s"><div class="card"><i class="num">04</i><svg class="ico" viewBox="0 0 24 24"><path pathLength="1" d="M12 3a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3zM5 11a7 7 0 0 0 14 0M12 18v3"/></svg><h3>Педагогикалық техника</h3><ul><li>Сөйлеу мәдениеті: дауыс, дикция</li><li>Мимика, ым-ишара, қалып</li><li>Эмоцияны реттеу</li><li>Қарым-қатынас техникасы</li></ul><div class="mini" data-sc="t.talk s.nod" data-p="" data-b="Дауыс пен ым-ишара"></div></div></div>
+  </div>
+</section>
+
+<section class="slide" data-say="Шеберлікті дамыту жолдары: ғылыми-зерттеу жұмысы, әдістемелік шеберлікті жетілдіру, рефлексия және әріптестік бақылау, үздіксіз кәсіби даму.">
+  <h2 class="rv">Шеберлікті <span>дамыту жолдары</span></h2>
+  <div class="line"></div>
+  <div class="steps">
+    <div class="step rv" style="--d:.5s"><img class="th" src="https://o.quizlet.com/EGLpSxJRzyzz9fB2wDOdnA.gif" alt="Ғылыми-зерттеу" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"><b>1</b>Ғылыми-зерттеу жұмысы</div>
+    <div class="step rv" style="--d:.8s"><img class="th fit" src="https://miro.medium.com/v2/resize:fit:1200/1*3iASmWseIffRjzjsi80PQQ.png" alt="Әдістеме" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"><b>2</b>Әдістемелік шеберлікті жетілдіру</div>
+    <div class="step rv" style="--d:1.1s"><img class="th fit" src="https://cdn.prod.website-files.com/6156c92cb3f1a26201745fa2/663deef12c6982099ef79f35_Reflective%20Blog%20Cover.avif" alt="Рефлексия" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"><b>3</b>Рефлексия, әріптестік бақылау</div>
+    <div class="step rv" style="--d:1.4s"><img class="th kb" src="https://i.ytimg.com/vi/-gFFYtEpaNM/maxresdefault.jpg" alt="Үздіксіз даму" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"><b>4</b>Үздіксіз кәсіби даму</div>
+  </div>
+</section>
+
+<section class="slide end" data-say="Қорытынды: шеберлік бағыттылық, білім, қабілет және техниканың бірлігі. Назарларыңызға рахмет!">
+  <div class="mini abs rv" style="--d:1.4s" data-sc="s.raise t.wave s.raise s.raise" data-b="Рахмет!"></div>
+  <p class="tag rv">Қорытынды</p>
+  <p class="big rv" style="--d:.3s">Шеберлік = <em>бағыттылық + білім + қабілет + техника</em></p>
+  <h1 class="rv" style="--d:.7s"><span class="grad">Назарларыңызға рахмет!</span></h1>
+  <div class="author rv" style="--d:1.1s">Дайындаған: Тұрсынова Меруерт</div>
+</section>
+
+</main>
+<div class="nav"><button id="pv" aria-label="Артқа">&#8592;</button><span id="cnt">1 / 7</span><button id="nx" aria-label="Алға">&#8594;</button></div>
+
+<div class="tools"><button id="bm">♪ Музыка</button><button id="bv">Дауыс</button><button id="ba">▶ Авто</button><button id="bf">⛶</button></div>
+
+<script>
+(() => {
+  const S = [...document.querySelectorAll('.slide')], pr = document.getElementById('pr'), cnt = document.getElementById('cnt');
+  let i = 0, tid, auto, at, AC, master, music = false, voice = false;
+  function typeIt() {
+    const el = document.getElementById('typed'), t = el.dataset.t; let k = 0;
+    clearInterval(tid); el.textContent = '';
+    tid = setInterval(() => { el.textContent = t.slice(0, ++k); if (k >= t.length) clearInterval(tid); }, 38);
+  }
+  function go(n) {
+    if (n < 0 || n >= S.length || n === i) return;
+    const o = S[i]; o.classList.remove('active'); o.classList.add('out');
+    setTimeout(() => o.classList.remove('out'), 700);
+    i = n; S[i].classList.add('active'); S[i].scrollTop = 0;
+    pr.style.width = ((i + 1) / S.length * 100) + '%';
+    cnt.textContent = (i + 1) + ' / ' + S.length;
+    if (i === 0) typeIt();
+    whoosh(); say(); sched(); if (i === S.length - 1) burst();
+  }
+
+  const on = (id, v) => document.getElementById(id).classList.toggle('on', v);
+  function initAudio() {
+    if (AC) return;
+    AC = new (window.AudioContext || window.webkitAudioContext)();
+    master = AC.createGain(); master.gain.value = 0; master.connect(AC.destination);
+    [220, 277.18, 329.63, 440].forEach((f, k) => {
+      const o = AC.createOscillator(), g = AC.createGain(), l = AC.createOscillator(), lg = AC.createGain();
+      o.type = 'sine'; o.frequency.value = f; g.gain.value = .05;
+      l.frequency.value = .1 + k * .07; lg.gain.value = .03;
+      l.connect(lg); lg.connect(g.gain); o.connect(g); g.connect(master); o.start(); l.start();
+    });
+  }
+  function setMusic(v) {
+    music = v; initAudio(); AC.resume();
+    master.gain.linearRampToValueAtTime(v ? 1 : 0, AC.currentTime + 1); on('bm', v);
+  }
+  function whoosh() {
+    if (!AC || !music) return;
+    const n = AC.sampleRate * .5, b = AC.createBuffer(1, n, AC.sampleRate), d = b.getChannelData(0);
+    for (let k = 0; k < n; k++) d[k] = (Math.random() * 2 - 1) * (1 - k / n);
+    const s = AC.createBufferSource(), f = AC.createBiquadFilter(), g = AC.createGain();
+    s.buffer = b; f.type = 'bandpass';
+    f.frequency.setValueAtTime(400, AC.currentTime);
+    f.frequency.exponentialRampToValueAtTime(3000, AC.currentTime + .4);
+    g.gain.value = .15; s.connect(f); f.connect(g); g.connect(AC.destination); s.start();
+  }
+  function say() {
+    if (!window.speechSynthesis) return;
+    speechSynthesis.cancel(); if (!voice) return;
+    const u = new SpeechSynthesisUtterance(S[i].dataset.say), vs = speechSynthesis.getVoices();
+    const v = vs.find(v => v.lang.startsWith('kk')) || vs.find(v => v.lang.startsWith('ru'));
+    if (v) { u.voice = v; u.lang = v.lang; } else u.lang = 'kk-KZ';
+    u.rate = .95;
+    u.onend = () => { if (auto && i < S.length - 1) setTimeout(next, 1200); };
+    speechSynthesis.speak(u);
+  }
+  function sched() {
+    clearTimeout(at);
+    if (auto && !voice) at = setTimeout(() => i < S.length - 1 ? next() : go(0), 8000);
+  }
+  function setAuto(v) { auto = v; on('ba', v); sched(); if (v && voice) say(); }
+  const tm = () => setMusic(!music), tv = () => { voice = !voice; on('bv', voice); say(); }, ta = () => setAuto(!auto);
+  const tf = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+  document.getElementById('bm').onclick = tm;
+  document.getElementById('bv').onclick = tv;
+  document.getElementById('ba').onclick = ta;
+  document.getElementById('bf').onclick = tf;
+  let C = [];
+  function burst() {
+    for (let k = 0; k < 140; k++) C.push({ x: w / 2, y: h * .6, vx: (Math.random() - .5) * 14, vy: -Math.random() * 14 - 4, r: Math.random() * 5 + 3, c: 'hsl(' + Math.random() * 360 + ',90%,60%)', l: 140 });
+  }
+  const next = () => go(i + 1), prev = () => go(i - 1);
+  document.getElementById('nx').onclick = next;
+  document.getElementById('pv').onclick = prev;
+  addEventListener('keydown', e => {
+    if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); next(); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) prev();
+    else if (e.key === 'Home') go(0);
+    else if (e.key === 'End') go(S.length - 1);
+    else if (e.key.toLowerCase() === 'p') ta();
+    else if (e.key.toLowerCase() === 'm') tm();
+    else if (e.key.toLowerCase() === 'v') tv();
+    else if (e.key.toLowerCase() === 'f') tf();
+  });
+  let sx = 0, sy = 0;
+  addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  addEventListener('touchend', e => { const d = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; if (Math.abs(d) > 60 && Math.abs(d) > Math.abs(dy) * 1.5) d < 0 ? next() : prev(); }, { passive: true });
+  let wl = 0;
+  addEventListener('wheel', e => { const a = S[i]; if (a.scrollHeight > a.clientHeight + 8) return; if (Date.now() - wl < 900) return; wl = Date.now(); e.deltaY > 0 ? next() : prev(); });
+  document.querySelectorAll('.card').forEach(c => {
+    c.addEventListener('pointermove', e => {
+      const r = c.getBoundingClientRect(), px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
+      c.style.transform = `perspective(700px) rotateY(${px * 14}deg) rotateX(${-py * 14}deg) scale(1.03)`;
+    });
+    c.addEventListener('pointerleave', () => c.style.transform = '');
+  });
+  const cv = document.getElementById('bg'), x = cv.getContext('2d'), m = { x: -999, y: -999 };
+  let w, h, P = [];
+  function rs() {
+    w = cv.width = innerWidth; h = cv.height = innerHeight;
+    P = Array.from({ length: Math.min(90, (w * h / 16000) | 0) }, () => ({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .6, vy: (Math.random() - .5) * .6, r: Math.random() * 2 + 1 }));
+  }
+  addEventListener('resize', rs); rs();
+  addEventListener('pointermove', e => { m.x = e.clientX; m.y = e.clientY; const r = document.documentElement.style; r.setProperty('--mx', e.clientX / w - .5); r.setProperty('--my', e.clientY / h - .5); });
+  (function d() {
+    x.clearRect(0, 0, w, h);
+    for (const p of P) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+      const dx = p.x - m.x, dy = p.y - m.y, ds = Math.hypot(dx, dy);
+      if (ds < 120 && ds > 0) { p.x += dx / ds * 2; p.y += dy / ds * 2; }
+      x.fillStyle = 'rgba(255,255,255,.8)'; x.beginPath(); x.arc(p.x, p.y, p.r, 0, 7); x.fill();
+    }
+    for (let a = 0; a < P.length; a++) for (let b = a + 1; b < P.length; b++) {
+      const q = Math.hypot(P[a].x - P[b].x, P[a].y - P[b].y);
+      if (q < 110) { x.strokeStyle = 'rgba(255,255,255,' + (.25 - q / 110 * .25) + ')'; x.beginPath(); x.moveTo(P[a].x, P[a].y); x.lineTo(P[b].x, P[b].y); x.stroke(); }
+    }
+    for (const c of C) { c.vy += .25; c.x += c.vx; c.y += c.vy; c.l--; x.fillStyle = c.c; x.fillRect(c.x, c.y, c.r, c.r * .6); }
+    C = C.filter(c => c.l > 0);
+    requestAnimationFrame(d);
+  })();
+  const SK = '#f5c9a0', TC = [['#3b82f6', '#2b2b2b'], ['#ff7a59', '#5b3a1e'], ['#22c55e', '#111'], ['#f59e0b', '#7a4a1e'], ['#a78bfa', '#222']];
+  function ch(t, a, n) {
+    const c = t === 't' ? TC[0] : TC[1 + n % 4];
+    const g = t === 't' ? '<circle cx="42" cy="43" r="6.5" fill="none" stroke="#222" stroke-width="1.6"/><circle cx="58" cy="43" r="6.5" fill="none" stroke="#222" stroke-width="1.6"/><path d="M48.5 43h3" stroke="#222" stroke-width="1.5"/>' : '';
+    return `<svg viewBox="0 0 100 130" class="ch ${t === 't' ? 'tc' : 'sc'} ${a}"><g class="bob"><g class="arm l"><rect x="14" y="66" width="14" height="42" rx="7" fill="${c[0]}"/><circle cx="21" cy="110" r="7" fill="${SK}"/></g><rect x="26" y="62" width="48" height="56" rx="18" fill="${c[0]}"/><g class="arm r"><rect x="72" y="66" width="14" height="42" rx="7" fill="${c[0]}"/><circle cx="79" cy="110" r="7" fill="${SK}"/></g><circle cx="50" cy="40" r="22" fill="${SK}"/><path d="M28 38a22 22 0 0 1 44 0c-8-9-36-9-44 0z" fill="${c[1]}"/><circle cx="42" cy="43" r="2.4" fill="#222"/><circle cx="58" cy="43" r="2.4" fill="#222"/>${g}<ellipse class="mo" cx="50" cy="54" rx="5" ry="3" fill="#b3414b"/></g></svg>`;
+  }
+  document.querySelectorAll('.mini').forEach(m => {
+    let n = 0, s = '';
+    m.dataset.sc.split(' ').forEach(p => { const [t, a] = p.split('.'); s += ch(t, a, n++); });
+    if (m.dataset.p === 'board') s = '<div class="board"></div>' + s;
+    if (m.dataset.p === 'hearts') s += '<i class="ht">&#9829;</i><i class="ht" style="left:40%;animation-delay:.8s">&#9829;</i><i class="ht" style="left:70%;animation-delay:1.6s">&#9829;</i>';
+    if (m.dataset.b) s += '<span class="bubble">' + m.dataset.b + '</span>';
+    m.innerHTML = s;
+  });
+  if (!document.documentElement.requestFullscreen) document.getElementById('bf').style.display = 'none';
+  typeIt();
+})();
+
+</script></body></html>
